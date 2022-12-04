@@ -28,6 +28,12 @@ public class ProdukService {
                 .orElseThrow(() -> new TidakKetemuException("PRODUK DENGAN ID " + id + " TIDAK TERDETEKSI"));
     }
 
+    //coba cari produk berdasarkan tipe
+    public ProdukEntity cariTipeProduk(String tipeProduk){
+        return produkRepository.findById(tipeProduk)
+                .orElseThrow(() -> new TidakKetemuException("PRODUK DENGAN TIPE " +tipeProduk+ " TIDAK TERDETEKSI"));
+    }
+
     // CREATE PRODUK
     public ProdukEntity menambahProduk(ProdukEntity produkEntity){
         // MELAKUKAN VALIDASI MANUAL
@@ -40,6 +46,9 @@ public class ProdukService {
         }
         if (!StringUtils.hasText(produkEntity.getHarga())){
             throw new PermintaanTidakDikabulkanException("HARGA PRODUK TIDAK BOLEH KOSONG");
+        }
+        if (!StringUtils.hasText(produkEntity.getTipeProduk())){
+            throw new PermintaanTidakDikabulkanException("TIPE PRODUK TIDAK BOLEH KOSONG");
         }
 
         return produkRepository.save(produkEntity);
@@ -63,6 +72,9 @@ public class ProdukService {
         }
         if (!StringUtils.hasText(produkEntity.getHarga())){
             throw new PermintaanTidakDikabulkanException("HARGA PRODUK TIDAK BOLEH KOSONG");
+        }
+        if (!StringUtils.hasText(produkEntity.getTipeProduk())){
+            throw new PermintaanTidakDikabulkanException("TIPE PRODUK TIDAK BOLEH KOSONG");
         }
 
 

@@ -23,6 +23,10 @@ public class ProdukController {
         return produkService.cariSemua();
     }
 
+    //Method cari produk berdasarkan tipe
+    @GetMapping("/produk")
+    public ProdukEntity cariByTipe(@PathVariable("tipeProduk")String tipeProduk) {return produkService.cariTipeProduk(tipeProduk);}
+
     // METHOD CARI BY ID
     @GetMapping("/produk/{id}")
     public ProdukEntity cariDariId(@PathVariable("id") Long id){
